@@ -6,7 +6,7 @@ from langchain_core.tools import Tool
 from langchain_community.llms import Ollama
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from ..config import OLLAMA_MODEL, DEFAULT_TEMPERATURE, DEFAULT_CHUNK_SIZE
+from src.config import OLLAMA_MODEL, DEFAULT_TEMPERATURE, DEFAULT_CHUNK_SIZE
 
 # Load spaCy model
 nlp = spacy.load("en_core_web_sm")
@@ -36,10 +36,12 @@ def simple_rag_with_ollama(
     doc = nlp(corpus)
     sentences = [sent.text.strip() for sent in doc.sents if sent.text.strip()]
 
-    # Sentence-based chunking
+    # Using sentence-based chunking to split text into manageable pieces while preserving semantic meaning.
+    # Each chunk will contain complete sentences up to the specified chunk_size limit.
     chunks, current_chunk, current_len = [], [], 0
     for sentence in sentences:
         sent_len = len(sentence.split())
+        # If the current chunk is too large, add it to the chunks list and start a new chunk
         if current_len + sent_len > chunk_size and current_chunk:
             chunks.append(" ".join(current_chunk))
             current_chunk, current_len = [], 0

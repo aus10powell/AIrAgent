@@ -4,7 +4,7 @@ from typing import List
 from langchain_core.tools import Tool
 from langchain_core.prompts import PromptTemplate
 from langchain_community.llms import Ollama
-from ..config import OLLAMA_MODEL, SUMMARIZATION_TEMPERATURE
+from src.config import OLLAMA_MODEL, SUMMARIZATION_TEMPERATURE
 
 # Initialize LLM for review summarization
 llm = Ollama(model=OLLAMA_MODEL, temperature=SUMMARIZATION_TEMPERATURE)

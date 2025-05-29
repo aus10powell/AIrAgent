@@ -7,10 +7,10 @@ from typing import Optional
 def load_from_parquet(file_path: str) -> pd.DataFrame:
     """
     Load data from a parquet file.
-    
+
     Args:
         file_path (str): Path to the parquet file
-        
+
     Returns:
         pd.DataFrame: DataFrame containing the data
     """
@@ -26,26 +26,28 @@ def load_from_parquet(file_path: str) -> pd.DataFrame:
 def load_listings(city: str) -> pd.DataFrame:
     """
     Load listings data for a specific city.
-    
+
     Args:
         city (str): City name
-        
+
     Returns:
         pd.DataFrame: Listings data
     """
-    from ..config import get_listings_path
+    from src.config import get_listings_path
+
     return load_from_parquet(get_listings_path(city))
 
 
 def load_reviews(city: str) -> pd.DataFrame:
     """
     Load reviews data for a specific city.
-    
+
     Args:
         city (str): City name
-        
+
     Returns:
         pd.DataFrame: Reviews data
     """
-    from ..config import get_reviews_path
-    return load_from_parquet(get_reviews_path(city)) 
+    from src.config import get_reviews_path
+
+    return load_from_parquet(get_reviews_path(city))
